@@ -9,7 +9,8 @@ class CvsParserTest extends FlatSpec {
 
     val parser = CvsParser
 
-    val result2 = parser.parse(" ( '#A_IS_B', '2', '3','AB, CDE', 'A\\\'E'  ) ")
+    val result2 =
+      parser.parse(" ( #ABC, '2', '3','AB, CDE', 'A\\\'E', #A_B.C  ) ")
     assert(result2.isInstanceOf[ParseOk[CValue]])
     assert(
       result2
@@ -18,24 +19,25 @@ class CvsParserTest extends FlatSpec {
         .equals(
           CArray(
             List(
-              CString("#A_IS_B"),
+              CTranslatableString("#ABC"),
               CString("2"),
               CString("3"),
               CString("AB, CDE"),
-              CString("A\'E")
+              CString("A\'E"),
+              CTranslatableString("#A_B.C")
             )
           )
         )
     )
 
-    val param = result2
-      .asInstanceOf[ParseOk[CValue]]
-      .value
-      .asInstanceOf[CArray]
-      .getVal
-      .head
-      .asInstanceOf[CString]
-      .value
-    assert(param.equals("#A_IS_B"))
+//    val param = result2
+//      .asInstanceOf[ParseOk[CValue]]
+//      .value
+//      .asInstanceOf[CArray]
+//      .getVal
+//      .head
+//      .asInstanceOf[CString]
+//      .value
+//    assert(param.equals("#A_IS_B"))
   }
 }

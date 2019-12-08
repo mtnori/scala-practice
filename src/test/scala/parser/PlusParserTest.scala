@@ -16,11 +16,5 @@ class PlusParserTest extends FlatSpec {
 
     val result2 = parser.parse("hello")
     assert(result2.isInstanceOf[ParseNg[_]])
-    assert(
-      result2
-        .asInstanceOf[ParseNg[List[String]]]
-        .message
-        .equals(List("Hello", "Hello"))
-    )
   }
 }
