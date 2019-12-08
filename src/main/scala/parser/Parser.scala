@@ -1,5 +1,7 @@
 package parser
 
+import scala.util.matching.Regex
+
 trait Parser[T] {
   def parse(input: String): ParseResult[T] = ???
 
@@ -8,6 +10,7 @@ trait Parser[T] {
   def pair2[U](rps: Parser[U]): Parser[(T, U)] = new Pair2(this, rps)
   def pair3[U, V](cps: Parser[U], rps: Parser[V]): Parser[(T, U, V)] =
     new Pair3(this, cps, rps)
+  def pattern(regex: Regex): Parser[String] = new PatternParser(regex)
   def or(p: Parser[T]): Parser[T] = new OrParser(this, p)
   def option(): Parser[Option[T]] = new OptionalParser[T](this)
   def eof: Parser[String] = new EOFParser()

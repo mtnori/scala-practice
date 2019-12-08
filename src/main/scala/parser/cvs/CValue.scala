@@ -8,6 +8,14 @@ case class CString(value: String) extends CValue {
   }
 }
 
+case class CTranslatableString(value: String) extends CValue {
+  override def equals(obj: Any): Boolean = {
+    obj.isInstanceOf[CTranslatableString] && value.equals(
+      obj.asInstanceOf[CTranslatableString].value
+    )
+  }
+}
+
 case class CArray(value: List[CValue]) extends CValue {
   def getVal: Seq[CValue] = value
 
