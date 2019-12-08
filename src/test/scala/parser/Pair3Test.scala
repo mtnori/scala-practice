@@ -1,5 +1,6 @@
+package parser
+
 import org.scalatest.FlatSpec
-import parser.{Pair3, ParseNg, ParseOk, Parser}
 
 class Pair3ParserTest extends FlatSpec {
 

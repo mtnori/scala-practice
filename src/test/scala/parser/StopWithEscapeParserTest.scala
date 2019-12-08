@@ -1,5 +1,6 @@
+package parser
+
 import org.scalatest.FlatSpec
-import parser.{Pair3, ParseOk, Parser}
 
 class StopWithEscapeParserTest extends FlatSpec {
   "parse" should "succeed" in {
@@ -29,5 +30,11 @@ class StopWithEscapeParserTest extends FlatSpec {
         ._2
         .equals("Hello\", world")
     )
+
+    val parser3 = Parser.stop("'", Map("\\\'" -> "\'"))
+    val result4 = parser3.parse("Hello\\\', world")
+    assert(result4.isInstanceOf[ParseOk[String]])
+    assert(result4.asInstanceOf[ParseOk[String]].value.equals("Hello\', world"))
+
   }
 }

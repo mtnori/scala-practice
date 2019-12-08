@@ -1,5 +1,6 @@
+package parser
+
 import org.scalatest.FlatSpec
-import parser.{ParseNg, ParseOk, Parser}
 
 class Pair2Test extends FlatSpec {
   "parse" should "succeed" in {

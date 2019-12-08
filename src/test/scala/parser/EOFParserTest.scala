@@ -1,5 +1,6 @@
+package parser
+
 import org.scalatest.FlatSpec
-import parser.{ParseNg, ParseOk, Parser}
 
 class EOFParserTest extends FlatSpec {
   "parse" should "succeed" in {

@@ -1,5 +1,6 @@
+package parser
+
 import org.scalatest.FlatSpec
-import parser.{ParseOk, Parser}
 
 class ManyParserTest extends FlatSpec {
   "parse" should "success" in {

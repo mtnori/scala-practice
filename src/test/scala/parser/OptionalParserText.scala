@@ -1,5 +1,6 @@
+package parser
+
 import org.scalatest.FlatSpec
-import parser.{ParseOk, Parser}
 
 class OptionalParserText extends FlatSpec {
   "parse" should "succeed" in {
