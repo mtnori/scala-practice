@@ -49,9 +49,43 @@ object Sample {
 
     // Scala REPL上の貼り付けモードを使用する
     val m = Member.syntax("m")
-    val name = "Alice"
+    val n = "Alice"
     val alice: Option[Member] = withSQL {
-      select.from(Member as m).where.eq(m.name, name)
+      select.from(Member as m).where.eq(m.name, n)
     }.map(rs => Member(rs)).single.apply()
+
+    val id = 123
+    val name1: Option[String] = DB readOnly { session: DBSession =>
+      session.single("select name from company where id = ?", id) { rs =>
+        rs.string("name")
+      }
+    }
+    val name2: Option[String] = DB readOnly { implicit session =>
+      sql"select name from company where id = ${id}"
+        .map(_.string("name"))
+        .single
+        .apply()
+    }
+
+    // トランザクション
+    def addCompany(name: String)(implicit s: DBSession = AutoSession): Unit = {
+      sql"insert into company values(${name})".update.apply()
+    }
+    def getAllNames()(implicit s: DBSession = AutoSession): List[String] = {
+      sql"select name from company".map(_.string("name")).list.apply()
+    }
+
+    val names: List[String] = getAllNames() // 新しいセッションが提供される
+    DB localTx { implicit session =>
+      addCompany("Typesafe") // トランザクション内
+      getAllNames() // トランザクション内。"Typesafe"が結果に含まれる
+    }
+
+    // SQLSyntax (sqls)
+    // SQLオブジェクトとして埋め込み可能なSQLの断片
+    val c: SQLSyntax = sqls"count(*)"
+    val hobby: String = "Bob%"
+    val query = sql"select ${c} from members where name like ${hobby}"
+    // "select count(*) from members where name like ?"
   }
 }
