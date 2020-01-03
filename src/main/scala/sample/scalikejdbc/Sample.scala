@@ -227,19 +227,19 @@ object Sample4 {
 //    .apply()
 }
 
-object Sample4 {
-  case class Company(id: Long, name: String)
-  object Company extends SkinnyCRUDMapper[Compans]
-
-  case class Member(id: Long,
-                    name: String,
-                    companyId: Long,
-                    company: Option[Company] = None)
-  object Member extends SkinnyCRUDMapper[Member] {
-    lazy val companyRef =
-      belongsTo[Company](Company, (m, c) => m.copy(company = c))
-    override lazy val defaultAlias = createAlias("m")
-    override def extract(rs: WrappedResultSet, n: ResultName[Member]) =
-      autoConstruct(rs, rn)
-  }
-}
+//object Sample4 {
+//  case class Company(id: Long, name: String)
+//  object Company extends SkinnyCRUDMapper[Compans]
+//
+//  case class Member(id: Long,
+//                    name: String,
+//                    companyId: Long,
+//                    company: Option[Company] = None)
+//  object Member extends SkinnyCRUDMapper[Member] {
+//    lazy val companyRef =
+//      belongsTo[Company](Company, (m, c) => m.copy(company = c))
+//    override lazy val defaultAlias = createAlias("m")
+//    override def extract(rs: WrappedResultSet, n: ResultName[Member]) =
+//      autoConstruct(rs, rn)
+//  }
+//}
