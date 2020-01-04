@@ -9,6 +9,8 @@ libraryDependencies += "org.mockito" % "mockito-core" % "3.1.0" % "test"
 libraryDependencies ++= Seq(
   "org.scalikejdbc" %% "scalikejdbc" % "3.4.+",
   "com.h2database" % "h2" % "1.4.+",
+  "com.typesafe" %% "scalalogging-slf4j" % "1.0.0",
+  "org.slf4j" % "slf4j-api" % "1.7.1",
   "ch.qos.logback" % "logback-classic" % "1.2.+",
   "org.scalikejdbc" %% "scalikejdbc-test" % "3.4.+" % "test",
 )
