@@ -3,7 +3,7 @@ package csvreader
 import java.io.File
 import java.nio.charset.{MalformedInputException, UnsupportedCharsetException}
 
-import skinny.logging.Logging
+import com.typesafe.scalalogging.{LazyLogging, Logger}
 
 import scala.io.{Codec, Source}
 import scala.util.Try
@@ -52,7 +52,7 @@ class TestEntityDataSource(val file: File,
                            val deliminator: String,
                            val encoding: Codec = Codec.UTF8)
     extends DataSource[TestEntity]
-    with Logging {
+    with LazyLogging {
 
   override protected def parse(columns: Seq[String]): Option[TestEntity] = {
     columns match {
@@ -69,7 +69,7 @@ class Test2EntityDataSource(val file: File,
                             val deliminator: String,
                             val encoding: Codec = Codec.UTF8)
     extends DataSource[Test2Entity]
-    with Logging {
+    with LazyLogging {
   override protected def parse(columns: Seq[String]): Option[Test2Entity] = {
     columns match {
       case Seq(v1, v2, v3, v4) =>
@@ -81,7 +81,7 @@ class Test2EntityDataSource(val file: File,
   }
 }
 
-object CSVReader extends App with Logging {
+object CSVReader extends App with LazyLogging {
   Try {
     val deliminator = if (args.length >= 1) args(0) else ","
     val encoding = if (args.length >= 2) args(1) else "UTF-8"

@@ -2,9 +2,9 @@ package sample.scalikejdbc
 
 import sample.scalikejdbc.Sample3.Company
 import scalikejdbc._
-import skinny.orm.SkinnyCRUDMapper
-import skinny.orm.feature._
-import skinny.orm.feature.associations.Association
+//import skinny.orm.SkinnyCRUDMapper
+//import skinny.orm.feature._
+//import skinny.orm.feature.associations.Association
 
 object Sample {
   def main(args: Array[String]): Unit = {
